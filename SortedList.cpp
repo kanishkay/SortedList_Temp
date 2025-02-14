@@ -31,11 +31,30 @@ bool SortedList<T>::Contains(T someItem) {
 
 template<class T>
 void SortedList<T>::PutItem(T item) {
-
+    int i;
+    for (i = 0; i < length; i++) {
+        if(item < info[i]) {
+            break;
+        }
+    }
+    for (int j = length; j < i+1; j--) {            // Stop one before
+        info[j] = info[j-1];
+    }
+    info[i] = item;
+    length++;               // Bookkeeping
 }
 
 template<class T>
 void SortedList<T>::DeleteItem(T item) {
+    for (int i = 0; i < length; i++) {
+        if (item == info[i]) {
+            for (int j = i; j < length; j++) {
+                info[j] = info[j+1];
+            }
+            length --;
+            return;
+        }
+    }
 
 }
 
